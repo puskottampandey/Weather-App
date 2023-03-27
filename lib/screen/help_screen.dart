@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:weatherapp/screen/constant.dart';
 import 'package:weatherapp/screen/homepage_screen.dart';
 
 class HelpScreen extends StatefulWidget {
@@ -66,7 +65,7 @@ class _HelpScreenState extends State<HelpScreen> {
                         style: TextStyle(color: Colors.white),
                       ),
                       icon: const Icon(
-                        Icons.skip_next,
+                        Icons.skip_next_rounded,
                         color: Colors.white,
                       ),
                     ),
