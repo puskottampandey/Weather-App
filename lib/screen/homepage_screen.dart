@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:weatherapp/screen/constant.dart';
 import 'package:http/http.dart' as http;
@@ -16,14 +17,14 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   var cityName = "";
   bool isloading = true;
+
   Future<Map<String, dynamic>>? futureWeatherData;
+  Future<Map<String, dynamic>>? currentWeatherData;
 
   Future<Map<String, dynamic>> fetchData(String cityName) async {
     var url = Uri.parse(
         "http://api.weatherapi.com/v1/current.json?key=$apiKey &q=$cityName");
 
-    /*
-        "https://api.openweathermap.org/data/2.5/weather?q=$cityName  &appid=$apiKey"); */
     var response = await http.get(url);
     final weatherdata = jsonDecode(response.body);
     return weatherdata;
@@ -38,13 +39,18 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    applocation();
-  }
+  Future<Map<String, dynamic>> fetchWeatherData() async {
+    Position position = await Geolocator.getCurrentPosition();
+    double lat = position.latitude;
+    double lon = position.longitude;
 
-  applocation() async {
+    var url = Uri.parse(
+        "http://api.weatherapi.com/v1/current.json? key=$apiKey  &q=$lat,$lon ");
+    var response = await http.get(url);
+    final weatherdata = jsonDecode(response.body);
+    return weatherdata;
+
+    /*
     Location location = Location();
 
     bool serviceEnabled;
@@ -53,18 +59,22 @@ class _HomepageState extends State<Homepage> {
     serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled) {
       serviceEnabled = await location.requestService();
-      if (!serviceEnabled) {
-        return;
-      }
     }
 
     permissionGranted = await location.hasPermission();
     if (permissionGranted == PermissionStatus.denied) {
       permissionGranted = await location.requestPermission();
-      if (permissionGranted == PermissionStatus.granted) {
-        return;
-      }
+      if (permissionGranted == PermissionStatus.granted) {}
     }
+
+    latitude = locationData.latitude.toString();
+    longitude = locationData.longitude.toString();
+    final url =
+        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude &lon=$longitude&appid=$apiKey';
+    final response = await http.get(Uri.parse(url));
+    final responseData = json.decode(response.body);
+    return responseData;
+    */
   }
 
   @override
@@ -164,13 +174,11 @@ class _HomepageState extends State<Homepage> {
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
+                              children: const [
+                                Text(
                                   "City",
                                   style: TextStyle(fontSize: 20),
                                 ),
-                                Image.network(
-                                    weatherdata['current']['condition']['icon'])
                               ],
                             ),
                             Text(
