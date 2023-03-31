@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:weatherapp/screen/constant.dart';
 
 import 'package:weatherapp/screen/homepage_screen.dart';
 
@@ -31,7 +32,7 @@ class _HelpScreenState extends State<HelpScreen> {
               image: DecorationImage(
                   image:
                       AssetImage("assets/backgroundimage/backgroundimage.jpg"),
-                  fit: BoxFit.cover),
+                  fit: BoxFit.fitHeight),
             ),
           ),
           SafeArea(
@@ -40,19 +41,19 @@ class _HelpScreenState extends State<HelpScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "We show weather for you",
                     style: TextStyle(
                       letterSpacing: 2,
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
-                      color: Colors.white,
+                      color: kcolor,
                       fontFamily: "Roboto",
                       fontStyle: FontStyle.italic,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(250, 0, 5, 10),
+                    padding: const EdgeInsets.fromLTRB(250, 0, 5, 90),
                     child: TextButton.icon(
                       onPressed: () {
                         Navigator.push(
@@ -62,11 +63,11 @@ class _HelpScreenState extends State<HelpScreen> {
                       },
                       label: const Text(
                         "Skip",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.blue),
                       ),
                       icon: const Icon(
                         Icons.skip_next_rounded,
-                        color: Colors.white,
+                        color: Colors.blue,
                       ),
                     ),
                   )
@@ -79,35 +80,3 @@ class _HelpScreenState extends State<HelpScreen> {
     );
   }
 }
-/*Padding(
-                    padding: const EdgeInsets.fromLTRB(250, 0, 5, 10),
-                    child: Container(
-                      height: 50,
-                      width: 100,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            spreadRadius: 0.0,
-                            blurRadius: 2,
-                          )
-                        ],
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(32),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
-                            "Skip",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                          Icon(Icons.skip_next)
-                        ],
-                      ),
-                    ),
-                  ), */

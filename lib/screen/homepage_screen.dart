@@ -38,11 +38,6 @@ class _HomepageState extends State<Homepage> {
   }
 
   Future<Map<String, dynamic>> fetchWeatherData() async {
-    /*
-    Position position = await Geolocator.getCurrentPosition();
-    double lat = position.latitude;
-    double lon = position.longitude;
-*/
     Location location = Location();
 
     bool serviceEnabled;
@@ -205,6 +200,16 @@ class _HomepageState extends State<Homepage> {
                               weatherdata['current']['condition']['text']
                                   .toString(),
                               style: const TextStyle(fontSize: 15),
+                            ),
+                            Center(
+                              child: SizedBox(
+                                height: 150,
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                child: Image.network(
+                                  "https:${weatherdata['current']['condition']['icon']}",
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                           ],
                         ),
