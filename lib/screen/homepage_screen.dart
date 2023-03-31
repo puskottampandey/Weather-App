@@ -1,11 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:location/location.dart';
 import 'package:weatherapp/screen/constant.dart';
 import 'package:http/http.dart' as http;
-import 'package:weatherapp/screen/model.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -19,7 +18,6 @@ class _HomepageState extends State<Homepage> {
   bool isloading = true;
 
   Future<Map<String, dynamic>>? futureWeatherData;
-  Future<Map<String, dynamic>>? currentWeatherData;
 
   Future<Map<String, dynamic>> fetchData(String cityName) async {
     var url = Uri.parse(
@@ -40,21 +38,16 @@ class _HomepageState extends State<Homepage> {
   }
 
   Future<Map<String, dynamic>> fetchWeatherData() async {
+    /*
     Position position = await Geolocator.getCurrentPosition();
     double lat = position.latitude;
     double lon = position.longitude;
-
-    var url = Uri.parse(
-        "http://api.weatherapi.com/v1/current.json? key=$apiKey  &q=$lat,$lon ");
-    var response = await http.get(url);
-    final weatherdata = jsonDecode(response.body);
-    return weatherdata;
-
-    /*
+*/
     Location location = Location();
 
     bool serviceEnabled;
     PermissionStatus permissionGranted;
+    LocationData locationData;
 
     serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled) {
@@ -66,15 +59,15 @@ class _HomepageState extends State<Homepage> {
       permissionGranted = await location.requestPermission();
       if (permissionGranted == PermissionStatus.granted) {}
     }
+    locationData = await location.getLocation();
+    double? lat = locationData.latitude;
+    double? lon = locationData.longitude;
 
-    latitude = locationData.latitude.toString();
-    longitude = locationData.longitude.toString();
-    final url =
-        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude &lon=$longitude&appid=$apiKey';
-    final response = await http.get(Uri.parse(url));
-    final responseData = json.decode(response.body);
-    return responseData;
-    */
+    var url = Uri.parse(
+        "http://api.weatherapi.com/v1/current.json?key=$apiKey &q=$lat,$lon");
+    var response = await http.get(url);
+    final weatherdata = jsonDecode(response.body);
+    return weatherdata;
   }
 
   @override
@@ -148,10 +141,12 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
             FutureBuilder<Map<String, dynamic>>(
-              future: futureWeatherData,
+              future: textcoller.text.trim().isEmpty
+                  ? fetchWeatherData()
+                  : futureWeatherData,
               builder: ((context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
-                  final weatherdata = snapshot.data!;
+                  final weatherdata = snapshot.data;
                   return Padding(
                     padding: const EdgeInsets.all(8),
                     child: Container(
@@ -186,7 +181,7 @@ class _HomepageState extends State<Homepage> {
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 25),
                             ),
-                            Text(weatherdata['location']['country']),
+                            Text(weatherdata['location']['country'].toString()),
                             const SizedBox(
                               height: 50,
                             ),
@@ -222,7 +217,7 @@ class _HomepageState extends State<Homepage> {
                     ConnectionState.waiting) {
                   return const CircularProgressIndicator();
                 } else {
-                  return const Text("No Data");
+                  return const Text("Nodata ");
                 }
               }),
             )
