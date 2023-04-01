@@ -10,6 +10,12 @@ This is a simple weather app built with Flutter that displays the current temper
 
 -Uses the Weatherapi API to retrieve weather data
 
+## Screenshots
+
+[App Screenshot](https://www.dropbox.com/s/fappf5vsqv7jk29/Screenshot_20230401-190424.png?dl=0)
+[App Screenshot](https://www.dropbox.com/s/0dw5sey25u3mk80/Screenshot_20230401-190441.png?dl=0)
+[App Screenshot](https://www.dropbox.com/s/whobr4man4zizg1/Screenshot_20230401-191315.png?dl=0)
+
 ## Run Locally
 
 Clone the project

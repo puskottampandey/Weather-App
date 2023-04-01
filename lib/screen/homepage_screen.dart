@@ -154,7 +154,7 @@ class _HomepageState extends State<Homepage> {
                     if (snapshot.hasData) {
                       final weatherdata = snapshot.data;
                       return Container(
-                        height: 500,
+                        height: 600,
                         width: MediaQuery.of(context).size.width * 0.9,
                         decoration: BoxDecoration(
                           color: kcolor,
@@ -186,7 +186,7 @@ class _HomepageState extends State<Homepage> {
                                 height: 50,
                               ),
                               SizedBox(
-                                height: 120,
+                                height: 200,
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 child: Image.network(
                                   "https:${weatherdata['current']['condition']['icon']}",
