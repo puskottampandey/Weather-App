@@ -12,9 +12,9 @@ This is a simple weather app built with Flutter that displays the current temper
 
 ## Screenshots
 
-[App Screenshot](https://www.dropbox.com/s/fappf5vsqv7jk29/Screenshot_20230401-190424.png?dl=0)
-[App Screenshot](https://www.dropbox.com/s/0dw5sey25u3mk80/Screenshot_20230401-190441.png?dl=0)
-[App Screenshot](https://www.dropbox.com/s/whobr4man4zizg1/Screenshot_20230401-191315.png?dl=0)
+[Help Screen](https://www.dropbox.com/s/fappf5vsqv7jk29/Screenshot_20230401-190424.png?dl=0)
+[HomePagescreen current location](https://www.dropbox.com/s/0dw5sey25u3mk80/Screenshot_20230401-190441.png?dl=0)
+[location screen](https://www.dropbox.com/s/whobr4man4zizg1/Screenshot_20230401-191315.png?dl=0)
 
 ## Run Locally
 
