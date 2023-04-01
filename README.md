@@ -1,16 +1,41 @@
-# weatherapp
+# WeatherApp
 
-A new Flutter project.
+This is a simple weather app built with Flutter that displays the current temperature and weather condition for the user's current location, as well as for specified cities.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+-Displays the current temperature and weather condition for the user's current location
 
-A few resources to get you started if this is your first Flutter project:
+-Allows users to search for and display weather information for different cities
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+-Uses the Weatherapi API to retrieve weather data
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/puskottampandey/Weather-App
+```
+
+Go to the project directory
+
+```bash
+  cd  weatherapp
+
+```
+
+Install dependencies
+
+```bash
+http: ^0.13.3
+location: ^5.0.1
+url_launcher: ^6.1.10
+```
+
+Add API "weatherapi"
+
+```bash
+  https://www.weatherapi.com/
+
+```

@@ -226,7 +226,7 @@ class _HomepageState extends State<Homepage> {
                                             Padding(
                                               padding:
                                                   const EdgeInsets.fromLTRB(
-                                                      25, 0, 10, 20),
+                                                      25, 0, 10, 10),
                                               child: Row(
                                                 children: [
                                                   Text(
@@ -234,7 +234,7 @@ class _HomepageState extends State<Homepage> {
                                                             ['temp_c']
                                                         .toString(),
                                                     style: TextStyle(
-                                                        fontSize: 18,
+                                                        fontSize: 15,
                                                         color: wcolor,
                                                         fontWeight:
                                                             FontWeight.bold),

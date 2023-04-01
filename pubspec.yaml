@@ -37,7 +37,6 @@ dependencies:
   url_launcher: any
   http: any
   location: any
-  shared_preferences: any
 
 dev_dependencies:
   flutter_test:
