@@ -193,13 +193,17 @@ class _HomepageState extends State<Homepage> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              Text(
-                                weatherdata['current']['condition']['text']
-                                    .toString(),
-                                style: TextStyle(fontSize: 15, color: wcolor),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  weatherdata['current']['condition']['text']
+                                      .toString(),
+                                  style: TextStyle(fontSize: 15, color: wcolor),
+                                ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 35, 10, 0),
                                 child: Row(
                                   children: [
                                     Container(
@@ -216,7 +220,8 @@ class _HomepageState extends State<Homepage> {
                                           children: [
                                             Text(
                                               "Temp",
-                                              style: TextStyle(color: wcolor),
+                                              style: TextStyle(
+                                                  color: wcolor, fontSize: 14),
                                             ),
                                             Padding(
                                               padding:
@@ -264,7 +269,8 @@ class _HomepageState extends State<Homepage> {
                                           children: [
                                             Text(
                                               "Wind",
-                                              style: TextStyle(color: wcolor),
+                                              style: TextStyle(
+                                                  color: wcolor, fontSize: 14),
                                             ),
                                             Padding(
                                               padding:
@@ -315,7 +321,8 @@ class _HomepageState extends State<Homepage> {
                                           children: [
                                             Text(
                                               "Humidity",
-                                              style: TextStyle(color: wcolor),
+                                              style: TextStyle(
+                                                  color: wcolor, fontSize: 14),
                                             ),
                                             Padding(
                                               padding:
