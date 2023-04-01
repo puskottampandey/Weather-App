@@ -61,13 +61,13 @@ class _HelpScreenState extends State<HelpScreen> {
                             MaterialPageRoute(
                                 builder: (context) => const Homepage()));
                       },
-                      label: const Text(
+                      label: Text(
                         "Skip",
-                        style: TextStyle(color: Colors.blue),
+                        style: TextStyle(color: kcolor),
                       ),
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.skip_next_rounded,
-                        color: Colors.blue,
+                        color: kcolor,
                       ),
                     ),
                   )

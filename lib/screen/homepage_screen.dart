@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:location/location.dart';
+
 import 'package:weatherapp/screen/constant.dart';
 import 'package:http/http.dart' as http;
 
@@ -68,165 +69,306 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kcolor,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: wcolor),
         backgroundColor: kcolor,
         centerTitle: true,
-        title: const Text("Weather App"),
+        title: Text(
+          "Weather App",
+          style: TextStyle(color: wcolor),
+        ),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                height: 55,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      spreadRadius: 0.0,
-                      blurRadius: 2,
-                    )
-                  ],
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                ),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 375,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          controller: textcoller,
-                          onChanged: (value) {
-                            updatebutton(value);
-                          },
-                          decoration: InputDecoration(
-                            iconColor: kcolor,
-                            suffixIcon: const Icon(Icons.search),
-                            suffixIconColor: kcolor,
-                            border: InputBorder.none,
-                            hintText: "Search location....",
-                            hintStyle: TextStyle(color: kcolor),
+        child: Container(
+          color: kcolor,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  height: 55,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        spreadRadius: 0.0,
+                      )
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(32)),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 375,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            controller: textcoller,
+                            onChanged: (value) {
+                              updatebutton(value);
+                            },
+                            decoration: InputDecoration(
+                              iconColor: wcolor,
+                              suffixIcon: const Icon(Icons.search),
+                              suffixIconColor: kcolor,
+                              border: InputBorder.none,
+                              hintText: "Search location....",
+                              hintStyle: TextStyle(color: kcolor),
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 50,
-              width: 200,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (textcoller.text.trim().isNotEmpty) {
-                    setState(() {
-                      futureWeatherData = fetchData(textcoller.text);
-                      isloading = false;
-                    });
-                  } else if (textcoller.text.trim().isEmpty) {}
-                },
-                child: Text(
-                  buttontext,
-                  style: TextStyle(color: kcolor),
+              SizedBox(
+                height: 50,
+                width: 200,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.indigo.shade400),
+                  onPressed: () {
+                    if (textcoller.text.trim().isNotEmpty) {
+                      setState(() {
+                        futureWeatherData = fetchData(textcoller.text);
+                        isloading = false;
+                      });
+                    } else if (textcoller.text.trim().isEmpty) {}
+                  },
+                  child: Text(
+                    buttontext,
+                    style: TextStyle(color: wcolor),
+                  ),
                 ),
               ),
-            ),
-            FutureBuilder<Map<String, dynamic>>(
-              future: textcoller.text.trim().isEmpty
-                  ? fetchWeatherData()
-                  : futureWeatherData,
-              builder: ((context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  final weatherdata = snapshot.data;
-                  return Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Container(
-                      height: 800,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            spreadRadius: 0.0,
-                            blurRadius: 2,
-                          )
-                        ],
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text(
-                                  "City",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              weatherdata['location']['name'].toString(),
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 25),
-                            ),
-                            Text(weatherdata['location']['country'].toString()),
-                            const SizedBox(
-                              height: 50,
-                            ),
-                            const Text(
-                              "Temperature",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 30),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  weatherdata['current']['temp_c'].toString(),
-                                  style: const TextStyle(fontSize: 20),
-                                ),
-                                const Text(
-                                  "℃",
-                                ),
-                              ],
-                            ),
-                            Text(
-                              weatherdata['current']['condition']['text']
-                                  .toString(),
-                              style: const TextStyle(fontSize: 15),
-                            ),
-                            Center(
-                              child: SizedBox(
-                                height: 150,
+              Container(
+                color: Colors.indigo.shade700,
+                child: FutureBuilder<Map<String, dynamic>>(
+                  future: textcoller.text.trim().isEmpty
+                      ? fetchWeatherData()
+                      : futureWeatherData,
+                  builder: ((context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      final weatherdata = snapshot.data;
+                      return Container(
+                        height: 500,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: kcolor,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(0)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                weatherdata['location']['name'].toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                    color: wcolor),
+                              ),
+                              Text(
+                                weatherdata['current']['last_updated']
+                                    .toString(),
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              Text(
+                                weatherdata['location']['country'].toString(),
+                                style: TextStyle(color: wcolor),
+                              ),
+                              const SizedBox(
+                                height: 50,
+                              ),
+                              SizedBox(
+                                height: 120,
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 child: Image.network(
                                   "https:${weatherdata['current']['condition']['icon']}",
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                            ),
-                          ],
+                              Text(
+                                weatherdata['current']['condition']['text']
+                                    .toString(),
+                                style: TextStyle(fontSize: 15, color: wcolor),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 80,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          color: Colors.indigo.shade700,
+                                          borderRadius:
+                                              BorderRadiusDirectional.circular(
+                                                  8)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              "Temp",
+                                              style: TextStyle(color: wcolor),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      25, 0, 10, 20),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    weatherdata['current']
+                                                            ['temp_c']
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        color: wcolor,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(
+                                                    "℃",
+                                                    style: TextStyle(
+                                                      color: wcolor,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    Container(
+                                      height: 80,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          color: Colors.indigo.shade700,
+                                          borderRadius:
+                                              BorderRadiusDirectional.circular(
+                                                  8)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              "Wind",
+                                              style: TextStyle(color: wcolor),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      20, 0, 10, 20),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    weatherdata['current']
+                                                            ['wind_kph']
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: wcolor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "Km/h",
+                                                    style: TextStyle(
+                                                        fontSize: 6,
+                                                        color: wcolor,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    Container(
+                                      height: 80,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          color: Colors.indigo.shade700,
+                                          borderRadius:
+                                              BorderRadiusDirectional.circular(
+                                                  8)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              "Humidity",
+                                              style: TextStyle(color: wcolor),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      25, 0, 10, 20),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    weatherdata['current']
+                                                            ['humidity']
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: wcolor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "%",
+                                                    style: TextStyle(
+                                                        color: wcolor),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                  return Text("$snapshot.error");
-                } else if (snapshot.connectionState ==
-                    ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                } else {
-                  return const Text("Nodata ");
-                }
-              }),
-            )
-          ],
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text("$snapshot.error");
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return CircularProgressIndicator(
+                        backgroundColor: kcolor,
+                        color: wcolor,
+                      );
+                    } else {
+                      return const Text("Nodata ");
+                    }
+                  }),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
