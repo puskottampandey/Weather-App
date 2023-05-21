@@ -6,6 +6,7 @@ import 'package:location/location.dart';
 
 import 'package:weatherapp/screen/constant.dart';
 import 'package:http/http.dart' as http;
+import 'package:weatherapp/screen/week_screen.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -103,7 +104,8 @@ class _HomepageState extends State<Homepage> {
                       SizedBox(
                         width: 375,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 7, horizontal: 18),
                           child: TextFormField(
                             controller: textcoller,
                             onChanged: (value) {
@@ -201,9 +203,33 @@ class _HomepageState extends State<Homepage> {
                                   style: TextStyle(fontSize: 15, color: wcolor),
                                 ),
                               ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    "Today",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const weekweather()));
+                                    },
+                                    icon: const Icon(
+                                      Icons.navigate_next_rounded,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.fromLTRB(10, 35, 10, 0),
+                                    const EdgeInsets.fromLTRB(10, 10, 10, 0),
                                 child: Row(
                                   children: [
                                     Container(
