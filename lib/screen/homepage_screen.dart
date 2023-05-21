@@ -69,6 +69,7 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
+    Future<Map<String, dynamic>>? apidata = fetchData(cityName);
     return Scaffold(
       backgroundColor: kcolor,
       appBar: AppBar(
@@ -154,7 +155,7 @@ class _HomepageState extends State<Homepage> {
                       : futureWeatherData,
                   builder: ((context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
-                      final weatherdata = snapshot.data;
+                      final weatherdata = snapshot.data!;
                       return Container(
                         height: 600,
                         width: MediaQuery.of(context).size.width * 0.9,
@@ -218,7 +219,7 @@ class _HomepageState extends State<Homepage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const weekweather()));
+                                                  Weekweather(data: apidata)));
                                     },
                                     icon: const Icon(
                                       Icons.navigate_next_rounded,
