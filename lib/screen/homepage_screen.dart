@@ -6,7 +6,6 @@ import 'package:location/location.dart';
 
 import 'package:weatherapp/screen/constant.dart';
 import 'package:http/http.dart' as http;
-import 'package:weatherapp/screen/week_screen.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -167,7 +166,6 @@ class _HomepageState extends State<Homepage> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 weatherdata['location']['name'].toString(),
@@ -207,24 +205,11 @@ class _HomepageState extends State<Homepage> {
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: [
+                                children: const [
                                   const Text(
                                     "Today",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 20),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Weekweather(data: apidata)));
-                                    },
-                                    icon: const Icon(
-                                      Icons.navigate_next_rounded,
-                                      color: Colors.white,
-                                    ),
                                   ),
                                 ],
                               ),
@@ -383,6 +368,16 @@ class _HomepageState extends State<Homepage> {
                                   ],
                                 ),
                               ),
+                              const Padding(padding: EdgeInsets.only(top: 10)),
+                              Row(
+                                children: const [
+                                  Text(
+                                    "Tomorrow",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.white),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                         ),
