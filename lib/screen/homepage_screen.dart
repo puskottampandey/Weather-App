@@ -68,7 +68,6 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    Future<Map<String, dynamic>>? apidata = fetchData(cityName);
     return Scaffold(
       backgroundColor: kcolor,
       appBar: AppBar(
@@ -206,7 +205,7 @@ class _HomepageState extends State<Homepage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: const [
-                                  const Text(
+                                  Text(
                                     "Today",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 20),
@@ -368,16 +367,6 @@ class _HomepageState extends State<Homepage> {
                                   ],
                                 ),
                               ),
-                              const Padding(padding: EdgeInsets.only(top: 10)),
-                              Row(
-                                children: const [
-                                  Text(
-                                    "Tomorrow",
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white),
-                                  ),
-                                ],
-                              )
                             ],
                           ),
                         ),
