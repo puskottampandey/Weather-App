@@ -12,8 +12,8 @@ This is a simple weather app built with Flutter that displays the current temper
 
 ## Screenshots
 
-![photo_6274070720166344985_y](https://github.com/puskottampandey/Weather-App/assets/83902408/2e337bd6-334b-4d9e-a40a-4746c12f2c09)
-![photo_6274068302099756448_y](https://github.com/puskottampandey/Weather-App/assets/83902408/8378c586-758d-4f64-bc22-e60dba5775a0)
+![photo_6274070720166344985_y](https://github.com/puskottampandey/Weather-App/assets/83902408/b9a467e3-1799-493c-aabf-ae8da5f40030)
+![photo_6274068302099756448_y](https://github.com/puskottampandey/Weather-App/assets/83902408/c3d089ab-8ba9-4b2c-a36f-f4f4c95bf041)
 
 ## Run Locally
 
